@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="My First flutter web embedding">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="flutter_web_embedded">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>flutter_web_embedded</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="flutter.js" defer></script>
+
+  <script>
+    // The value below is injected by flutter build, do not touch.
+    const serviceWorkerVersion = null;
+  </script>
+  <!-- This script adds the flutter initialization JS code -->
+</head>
+<body>
+<div id="flutter_preview">
+  <div id="flutter_title">Flutter Embedded </div>
+
+  <div id="controls">
+    <label>
+      Title
+      <input  class="input" type="text" id="changeTitle">
+    </label> <br>
+    <label>
+
+      Contador <br>
+      <input class="input" id="value" value='0' readonly disabled/>
+
+      <div style="display: flex;width: 180px; justify-content: space-between; ">
+      <button  class="actions" style="background-color: #50C878"  id="increment">Adicionar +</button>
+      <button  class="actions" style="background-color: #ff0000" id="decrement">Remover -</button>
+        </div>
+    </label>
+  </div>
+
+  <div id="flutter_target" class="center">
+
+  </div>
+
+</div>
+
+
+
+  <script>
+   window.addEventListener("load", function (ev){
+        let target = document.querySelector("#flutter_target")
+
+        _flutter. loader.loadEntrypoint({
+            onEntrypointLoaded: async function (engineInitializer ){
+                let appRunner = await engineInitializer.initializeEngine({
+                    hostElement: target
+                })
+                await appRunner.runApp()
+            }
+        })
+    })
+  </script>
+
+
+<script src="myscript.js" defer></script>
+
+</body>
+</html>
+<style>
+  #flutter_target{
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  }
+  .input{
+  display: block;
+  padding: 3px;
+
+  margin-top: 10px;
+  }
+  .actions{
+  width: 85px;
+  margin-top: 3px;
+  height: 30px;
+  margin-bottom: 5px;
+  border: 0.3px solid black;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  }
+
+
+  #flutter_title{
+  font-size: 2em;
+  color: black;
+  margin-bottom: 2vh;
+  }
+  #flutter_preview{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 300px;
+  }
+</style>
